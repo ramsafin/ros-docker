@@ -2,4 +2,10 @@ catkin_ws/build/
 catkin_ws/devel/
 catkin_ws/install/
 catkin_ws/logs/
+
+# catkin-tools artifacts
 catkin_ws/.catkin_tools/
+
+# catkin_make artifacts
+catkin_ws/.catkin_workspace
+catkin_ws/src/CMakeLists.txt
