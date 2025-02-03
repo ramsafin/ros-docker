@@ -44,20 +44,6 @@ To start a container with GUI support and mount your ROS workspace, use:
 make run
 ```
 
-This runs:
-```bash
-docker run -it --rm \
-    --net=host \
-    --env="DISPLAY=$DISPLAY" \
-    --env="QT_X11_NO_MITSHM=1" \
-    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    --volume="$(pwd)/catkin_ws:/catkin_ws" \
-    --workdir="/catkin_ws" \
-    --gpus all \
-    --name="ros_noetic_dev" \
-    ros-noetic
-```
-
 ### 4. Building the ROS Workspace
 
 Once inside the container, navigate to your ROS workspace and build it:
