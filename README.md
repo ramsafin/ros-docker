@@ -8,6 +8,7 @@ Before you begin, make sure you have the following installed:
 
 - **Docker**: [Install Docker](https://docs.docker.com/get-docker/) for your platform.
 - **Git**: [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) if you don't have it.
+- **NVidia Container Toolkit**: [Install NVidia Container Toolkit](https://github.com/NVIDIA/nvidia-container-toolkit?tab=readme-ov-file) if you have NVidia GPU.
 
 ## Setting Up the Project
 
@@ -44,33 +45,6 @@ docker run -it --rm -v $(pwd)/catkin_ws:/catkin_ws ros-noetic
 - `--rm`: automatically removes the container when it stops
 - `-v $(pwd)/catkin_ws:/catkin_ws`: mounts your local `catkin_ws` directory to the container's `/catkin_ws` directory
 - `ros-noetic`: the Docker image tag you built earlier
-
-#### Running with GUI Support
-
-1. X11 (Xorg)
-```bash
-xhost +local:docker
-
-docker run -it --rm \
-    --net=host \
-    --privileged \
-    -e DISPLAY=$DISPLAY \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    ros-noetic
-```
-
-2. Wayland
-```bash
-xhost +si:localuser:$USER
-
-docker run -it --rm \
-    --net=host \
-    --privileged \
-    -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
-    -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
-    -v $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
-    ros-noetic
-```
 
 ### 4. Building the ROS Workspace
 
