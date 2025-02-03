@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# default arguments
+# Default arguments
 IMAGE_NAME="ros-noetic:gpu"
 CONTAINER_NAME="ros-noetic-dev"
 
-# parse arguments
+# Parse arguments
 while [[ "$#" -gt 0 ]]; do
     case $1 in
         --name) CONTAINER_NAME="$2"; shift ;;
@@ -14,20 +14,18 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-# allow the container to access the X server securely
+# Allow the container to access the X server securely
 xhost +SI:localuser:$(whoami)
 
-# run the ROS Noetic container
+# Run the ROS Noetic container
 docker run -it --rm \
     --gpus all \
     --net=host \
     --env="DISPLAY=$DISPLAY" \
-    --env="QT_X11_NO_MITSHM=1" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    --volume="$(pwd)/catkin_ws:/catkin_ws" \
-    --workdir="/catkin_ws" \
+    --volume="$(pwd)/catkin_ws:/home/ros/catkin_ws" \
     --name="$CONTAINER_NAME" \
     "$IMAGE_NAME"
 
-# revoke access after container exits
+# Revoke access after container exits
 xhost -SI:localuser:$(whoami)
