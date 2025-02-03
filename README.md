@@ -8,7 +8,7 @@ Before you begin, make sure you have the following installed:
 
 - **Docker**: [Install Docker](https://docs.docker.com/get-docker/) for your platform.
 - **Git**: [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) if you don't have it.
-- **NVidia Container Toolkit**: [Install NVidia Container Toolkit](https://github.com/NVIDIA/nvidia-container-toolkit?tab=readme-ov-file) if you have NVidia GPU.
+- **NVIDIA Container Toolkit**: [Install NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-container-toolkit?tab=readme-ov-file) if you have an NVIDIA GPU.
 
 ## Setting Up the Project
 
@@ -23,9 +23,12 @@ cd ros-noetic-docker
 
 ### 2. Build the Docker Image
 
-You can build the Docker image from the root of your project directory. 
-This will use the [`Dockerfile`](docker/Dockerfile) located in the [`docker/`](docker/) folder.
+You can build the Docker image using the provided Makefile:
+```bash
+make build
+```
 
+This runs:
 ```bash
 docker build -t ros-noetic -f docker/Dockerfile .
 ```
@@ -36,15 +39,24 @@ docker build -t ros-noetic -f docker/Dockerfile .
 
 ### 3. Running the Docker Container
 
-To start a container and mount your ROS workspace ([`catkin_ws`](catkin_ws)) into it, run the following command:
-
+To start a container with GUI support and mount your ROS workspace, use:
 ```bash
-docker run -it --rm -v $(pwd)/catkin_ws:/catkin_ws ros-noetic
+make run
 ```
-- `-it`: runs the container interactively
-- `--rm`: automatically removes the container when it stops
-- `-v $(pwd)/catkin_ws:/catkin_ws`: mounts your local `catkin_ws` directory to the container's `/catkin_ws` directory
-- `ros-noetic`: the Docker image tag you built earlier
+
+This runs:
+```bash
+docker run -it --rm \
+    --net=host \
+    --env="DISPLAY=$DISPLAY" \
+    --env="QT_X11_NO_MITSHM=1" \
+    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+    --volume="$(pwd)/catkin_ws:/catkin_ws" \
+    --workdir="/catkin_ws" \
+    --gpus all \
+    --name="ros_noetic_dev" \
+    ros-noetic
+```
 
 ### 4. Building the ROS Workspace
 
@@ -54,7 +66,7 @@ Once inside the container, navigate to your ROS workspace and build it:
 cd /catkin_ws && catkin_make
 ```
 
-You can also build the workspace using [catkin-tools](https://catkin-tools.readthedocs.io/en/latest/):
+Alternatively, using [catkin-tools](https://catkin-tools.readthedocs.io/en/latest/):
 ```bash
 cd /catkin_ws && catkin build
 ```
@@ -69,11 +81,20 @@ After building your workspace, you can start working with ROS nodes. For example
 roscore
 ```
 
-Do not forget to source your ROS environment and workspace.
+Do not forget to source your ROS environment and workspace:
+```bash
+source /opt/ros/noetic/setup.bash
+source /catkin_ws/devel/setup.bash
+```
 
 ### 6. Stopping the Container
 
 When you're finished, you can stop the container by typing `exit` or pressing `Ctrl+D`. Since the container was started with `--rm`, it will be automatically removed when stopped.
+
+To manually stop the container, run:
+```bash
+make stop
+```
 
 ## Contributing
 
