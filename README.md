@@ -82,6 +82,10 @@ To manually stop the container, run:
 make stop
 ```
 
+### 7. Troubleshooting
+
+A. [GPU selection in WSgl (WSL2)](https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg)
+
 ## Contributing
 
 If you'd like to contribute to this project, feel free to fork the repository and submit a pull request. You can also open an issue if you encounter any bugs or have suggestions for improvement.
