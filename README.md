@@ -1,6 +1,6 @@
 # ROS Noetic with Docker
 
-This project provides a setup for using ROS Noetic in a Docker container, making it easier to develop and test ROS packages within an isolated environment.
+This project provides a ready-to-use Docker container for ROS Noetic, optimized for development and testing. It simplifies the process of working with ROS Noetic in an isolated, reproducible environment that can run on both Windows (via WSL) and Linux. The setup includes GUI support for ROS development in WSLg and native Linux systems, along with easy integration with your existing ROS workspace.
 
 ## Prerequisites
 
@@ -9,6 +9,8 @@ Before you begin, make sure you have the following installed:
 - **Docker**: [install Docker](https://docs.docker.com/get-docker/) for your platform.
 - **NVIDIA Container Toolkit**: [install NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-container-toolkit?tab=readme-ov-file) if you have an NVIDIA GPU.
 - Windows Subsystem for Linux (WSL): [install WSL](https://learn.microsoft.com/ru-ru/windows/wsl/install) if you want to run Docker containers in Windows.
+
+Ensure you have WSLg installed, as it enables GUI support for Docker containers in Windows. If you're unsure about this, refer to the [WSLg Installation guide](https://github.com/microsoft/wslg).
 
 ## Setting Up the Project
 
@@ -23,17 +25,32 @@ cd ros-noetic-docker
 
 ### 2. Build the Docker Image
 
-You can build the Docker image using the provided [Makefile](Makefile):
+There are two build options available depending on your environment: WSL and Linux.
+
+Build the Docker image optimized for WSL:
 ```bash
-make build
+make build_wsl
 ```
+
+Build the Docker image optimized for Linux:
+```bash
+make build_linux
+```
+
+The [Makefile](Makefile) handles the setup for different environments, adjusting the Dockerfile build arguments accordingly.
 
 ### 3. Running the Docker Container
 
 To start a container with GUI support and mount your ROS workspace, use:
 ```bash
-make run
+make run_wsl
 ```
+or
+```bash
+make run_linux
+```
+
+This will automatically handle display forwarding if you are using WSLg. For non-WSLg setups, you may need to configure access to the X server (e.g., with `xhost` in non-WSL2 environments).
 
 ### 4. Building the ROS Workspace
 
@@ -82,11 +99,25 @@ The NVIDIA GPU can be selected in WSL by setting `MESA_D3D12_DEFAULT_ADAPTER_NAM
 echo "export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA" >> ~/.bashrc
 source ~/.bashrc
 ```
-Links: [GPU selection in WSLg](https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg).
+Follow the instructions in the [GPU selection in WSLg](https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg) guide.
 
 ### Containerizing GUI apps with WSLg
 
-Follow the instructions: [link](https://github.com/microsoft/wslg/blob/861d029e97bc99e68050f86c956803b42e8756da/samples/container/Containers.md).
+Follow the instructions in the [wslg/containers](https://github.com/microsoft/wslg/blob/861d029e97bc99e68050f86c956803b42e8756da/samples/container/Containers.md) guide.
+
+### Docker container cannot connect to X server
+
+Ensure that the `xhost` command is used to allow Docker to connect to the X server:
+```bash
+xhost +SI:localuser:$(whoami)
+```
+
+Additionally, verify that your X server is running.
+
+## Auxiliary
+
+1. For more detailed documentation on setting up and using ROS Noetic, visit the [official ROS documentation](http://wiki.ros.org/noetic).
+2. For more information about WSLg, visit the [WSLg official repository](https://github.com/microsoft/wslg).
 
 ## Contributing
 
