@@ -7,8 +7,8 @@ This project provides a setup for using ROS Noetic in a Docker container, making
 Before you begin, make sure you have the following installed:
 
 - **Docker**: [install Docker](https://docs.docker.com/get-docker/) for your platform.
-- **Git**: [install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) if you don't have it.
 - **NVIDIA Container Toolkit**: [install NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-container-toolkit?tab=readme-ov-file) if you have an NVIDIA GPU.
+- Windows Subsystem for Linux (WSL): [install WSL](https://learn.microsoft.com/ru-ru/windows/wsl/install) if you want to run Docker containers in Windows.
 
 ## Setting Up the Project
 
