@@ -9,3 +9,5 @@ catkin_ws/.catkin_tools/
 # catkin_make artifacts
 catkin_ws/.catkin_workspace
 catkin_ws/src/CMakeLists.txt
+
+.vscode/
