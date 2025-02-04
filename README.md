@@ -6,9 +6,9 @@ This project provides a setup for using ROS Noetic in a Docker container, making
 
 Before you begin, make sure you have the following installed:
 
-- **Docker**: [Install Docker](https://docs.docker.com/get-docker/) for your platform.
-- **Git**: [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) if you don't have it.
-- **NVIDIA Container Toolkit**: [Install NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-container-toolkit?tab=readme-ov-file) if you have an NVIDIA GPU.
+- **Docker**: [install Docker](https://docs.docker.com/get-docker/) for your platform.
+- **Git**: [install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) if you don't have it.
+- **NVIDIA Container Toolkit**: [install NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-container-toolkit?tab=readme-ov-file) if you have an NVIDIA GPU.
 
 ## Setting Up the Project
 
@@ -23,19 +23,10 @@ cd ros-noetic-docker
 
 ### 2. Build the Docker Image
 
-You can build the Docker image using the provided Makefile:
+You can build the Docker image using the provided [Makefile](Makefile):
 ```bash
 make build
 ```
-
-This runs:
-```bash
-docker build -t ros-noetic -f docker/Dockerfile .
-```
-
-- `-t ros-noetic`: tags the image with the name `ros-noetic`
-- `-f docker/Dockerfile`: specifies the path to the `Dockerfile`
-- `.`: sets the build context to the current project directory
 
 ### 3. Running the Docker Container
 
@@ -82,10 +73,20 @@ To manually stop the container, run:
 make stop
 ```
 
-### 7. Troubleshooting
+## Troubleshooting
 
-A. [GPU selection in WSgl (WSL2)](https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg)
-B. [Containerizing GUI applications with WSLg](https://github.com/microsoft/wslg/blob/main/samples/container/Containers.md)
+### How to select GPU in WSLg?
+
+The NVIDIA GPU can be selected in WSL by setting `MESA_D3D12_DEFAULT_ADAPTER_NAME`:
+```bash
+echo "export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA" >> ~/.bashrc
+source ~/.bashrc
+```
+Links: [GPU selection in WSLg](https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg).
+
+### Containerizing GUI apps with WSLg
+
+Follow the instructions: [link](https://github.com/microsoft/wslg/blob/861d029e97bc99e68050f86c956803b42e8756da/samples/container/Containers.md).
 
 ## Contributing
 
