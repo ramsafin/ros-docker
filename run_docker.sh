@@ -21,11 +21,17 @@ xhost +SI:localuser:$(whoami)
 docker run -it --rm \
     --gpus all \
     --net=host \
-    --env="DISPLAY=$DISPLAY" \
-    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    --volume="$(pwd)/catkin_ws:/home/ros/catkin_ws" \
+    --runtime=nvidia \
+    --device="/dev/dxg" \
+    -e DISPLAY \
+    -e WAYLAND_DISPLAY \
+    -e XDG_RUNTIME_DIR \
+    -v /mnt/wslg:/mnt/wslg \
+    -v /usr/lib/wsl:/usr/lib/wsl \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $(pwd)/catkin_ws:/home/ros/catkin_ws \
     --name="$CONTAINER_NAME" \
-    "$IMAGE_NAME"
+    $IMAGE_NAME
 
 # Revoke access after container exits
 xhost -SI:localuser:$(whoami)

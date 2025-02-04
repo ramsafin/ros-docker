@@ -1,16 +1,21 @@
 # See https://hub.docker.com/u/nvidia
 FROM nvidia/cudagl:11.4.1-runtime-ubuntu20.04
 
+# TBD
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Locale
 ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
 
+# TBD
 ENV QT_X11_NO_MITSHM=1
-ENV DEBIAN_FRONTEND=noninteractive
 
 # NVIDIA runtime for GPU acceleration
 ENV NVIDIA_VISIBLE_DEVICES=all
-ENV NVIDIA_DRIVER_CAPABILITIES=graphics,utility,compute
+ENV NVIDIA_DRIVER_CAPABILITIES=all
+
+ENV LD_LIBRARY_PATH=/usr/lib/wsl/lib
 
 # Install tools, ROS and system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \

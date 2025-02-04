@@ -85,6 +85,7 @@ make stop
 ### 7. Troubleshooting
 
 A. [GPU selection in WSgl (WSL2)](https://github.com/microsoft/wslg/wiki/GPU-selection-in-WSLg)
+B. [Containerizing GUI applications with WSLg](https://github.com/microsoft/wslg/blob/main/samples/container/Containers.md)
 
 ## Contributing
 
