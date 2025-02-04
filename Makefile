@@ -1,17 +1,26 @@
-DOCKER_IMAGE = ros-noetic-wsl:gpu
-DOCKER_CONTAINER = ros-noetic-dev
+DOCKER_IMAGE_LINUX = ros-noetic-linux:latest
+DOCKER_IMAGE_WSL = ros-noetic-wsl:latest
 
-run:
-	@echo "Running a Docker container: '${DOCKER_CONTAINER}'..."
-	bash run_docker.sh --image $(DOCKER_IMAGE) --name $(DOCKER_CONTAINER)
+build_linux:
+	@echo "Building for Linux..."
+	bash scripts/build_linux.sh
 
-build:
-	@echo "Building a Docker image: '${DOCKER_IMAGE}'"
-	docker build -t $(DOCKER_IMAGE) -f docker/Dockerfile .
+build_wsl:
+	@echo "Building for WSL..."
+	bash scripts/build_wsl.sh
+
+run_linux:
+	@echo "Running Linux container..."
+	bash scripts/run_linux.sh
+
+run_wsl:
+	@echo "Running WSL container..."
+	bash scripts/run_wsl.sh
 
 clean:
-	docker rmi $(DOCKER_IMAGE)
+	docker rmi $(DOCKER_IMAGE_LINUX) $(DOCKER_IMAGE_WSL)
 
 stop:
-	@echo "Stopping the Docker container: '${DOCKER_CONTAINER}'"
-	docker stop $(DOCKER_CONTAINER) || true
+	@echo "Stopping containers..."
+	docker stop ros-noetic-dev-linux || true
+	docker stop ros-noetic-dev-wsl || true
