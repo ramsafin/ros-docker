@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Default arguments
-IMAGE_NAME="ros-noetic:gpu"
+IMAGE_NAME="ros-noetic-wsl:gpu"
 CONTAINER_NAME="ros-noetic-dev"
 
 # Parse arguments

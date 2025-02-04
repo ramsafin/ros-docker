@@ -1,4 +1,4 @@
-DOCKER_IMAGE = ros-noetic:latest
+DOCKER_IMAGE = ros-noetic-wsl:gpu
 DOCKER_CONTAINER = ros-noetic-dev
 
 run:
