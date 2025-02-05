@@ -5,6 +5,7 @@ DOCKER_IMAGE="ros-noetic-wsl:latest"
 DOCKER_CONTAINER="ros-noetic-dev-wsl"
 
 echo "Running Docker container for WSL..."
+
 docker run -it --rm \
     --gpus all \
     --net=host \

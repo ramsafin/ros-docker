@@ -57,15 +57,20 @@ This will automatically handle display forwarding if you are using WSLg. For non
 Once inside the container, navigate to your ROS workspace and build it:
 
 ```bash
-cd /catkin_ws && catkin_make
+cd $ROS_WORKSPACE && catkin_make
 ```
 
 Alternatively, using [catkin-tools](https://catkin-tools.readthedocs.io/en/latest/):
 ```bash
-cd /catkin_ws && catkin build
+cd $ROS_WORKSPACE && catkin build
 ```
 
 This will generate the `build/`, `devel/`, and `install/` directories in the `catkin_ws` directory.
+
+If you have uninstalled dependencies, use:
+```bash
+rosdep install --from-paths $ROS_WORKSPACE/src --ignore-src -y
+```
 
 ### 5. Running ROS Nodes
 
@@ -78,7 +83,7 @@ roscore
 Do not forget to source your ROS environment and workspace:
 ```bash
 source /opt/ros/noetic/setup.bash
-source /catkin_ws/devel/setup.bash
+source $ROS_WORKSPACE/devel/setup.bash
 ```
 
 ### 6. Stopping the Container
