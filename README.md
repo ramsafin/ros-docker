@@ -41,7 +41,7 @@ The [Makefile](Makefile) handles the setup for different environments, adjusting
 
 ### 3. Running the Docker Container
 
-To start a container with GUI support and mount your ROS workspace, use:
+To start a container with GUI support and **mount your ROS workspace**, use:
 ```bash
 make run_wsl
 ```
