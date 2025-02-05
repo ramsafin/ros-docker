@@ -1,6 +1,6 @@
-# ROS Noetic with Docker
+# ROS with Docker
 
-This project provides a ready-to-use Docker container for ROS Noetic, optimized for development and testing. It simplifies the process of working with ROS Noetic in an isolated, reproducible environment that can run on both Windows (via WSL) and Linux. The setup includes GUI support for ROS development in WSLg and native Linux systems, along with easy integration with your existing ROS workspace.
+This project provides a ready-to-use Docker container for ROS 1 (ROS Noetic) for development and testing. It simplifies the process of working with ROS in an isolated, reproducible environment that can run on both Windows (via WSL) and Linux. The setup includes GUI support for ROS development in WSLg and native Linux systems, along with easy integration with your existing ROS workspace.
 
 ## Prerequisites
 
