@@ -54,6 +54,8 @@ This will automatically handle display forwarding if you are using WSLg. For non
 
 ### 4. Building the ROS Workspace
 
+By default your ROS workspace inside the container is `ROS_WORKSPACE=/home/ros/catkin_ws`.
+
 Once inside the container, navigate to your ROS workspace and build it:
 
 ```bash
@@ -118,6 +120,15 @@ xhost +SI:localuser:$(whoami)
 ```
 
 Additionally, verify that your X server is running.
+
+### How to check that NVIDIA is used for OpenGL rendering?
+
+Check the output of the command:
+```bash
+glxinfo -B | grep Device
+```
+
+It should be your NVIDIA GPU.
 
 ## Auxiliary
 
