@@ -19,8 +19,8 @@ Ensure you have WSLg installed, as it enables GUI support for Docker containers 
 If you haven't already, clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/ramsafin/ros-noetic-docker.git
-cd ros-noetic-docker
+git clone https://github.com/ramsafin/ros-docker.git
+cd ros-docker
 ```
 
 ### 2. Build the Docker Image
@@ -84,7 +84,7 @@ roscore
 
 Do not forget to source your ROS environment and workspace:
 ```bash
-source /opt/ros/noetic/setup.bash
+source /opt/ros/$ROS_DISTRO/setup.bash
 source $ROS_WORKSPACE/devel/setup.bash
 ```
 
