@@ -1,5 +1,5 @@
 # Use the NVIDIA OpenGL base image with GLVND and development tools for Ubuntu 20.04
-FROM nvidia/opengl:1.2-glvnd-devel-ubuntu20.04
+FROM nvidia/opengl:1.2-glvnd-runtime-ubuntu20.04
 
 # Build arguments to customize the image build process
 ARG WSL=false
